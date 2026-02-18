@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">KotlinBaseKit</string>
+    <string name="greeting_hello">Merhaba</string>
+    <string name="greeting_good_morning">Günaydın</string>
+    <string name="greeting_good_evening">İyi akşamlar</string>
+    <string name="ok">Tamam</string>
+    <string name="theme_light">Açık</string>
+    <string name="theme_dark">Koyu</string>
+    <string name="theme_system">Sistem</string>
+    <string name="language_english">İngilizce</string>
+    <string name="language_turkish">Türkçe</string>
+    <string name="language_german">Almanca</string>
+    <string name="language_system">Sistem</string>
+</resources>

@@ -1,0 +1,20 @@
+R_DEF: Internal format may change without notice
+local
+font montserrat_black
+font montserrat_blackitalic
+font montserrat_bold
+font montserrat_bolditalic
+font montserrat_extrabold
+font montserrat_extrabolditalic
+font montserrat_extralight
+font montserrat_extralightitalic
+font montserrat_italic
+font montserrat_light
+font montserrat_lightitalic
+font montserrat_medium
+font montserrat_mediumitalic
+font montserrat_regular
+font montserrat_semibold
+font montserrat_semibolditalic
+font montserrat_thin
+font montserrat_thinitalic

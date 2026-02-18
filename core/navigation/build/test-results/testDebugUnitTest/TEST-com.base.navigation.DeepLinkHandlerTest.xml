@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.base.navigation.DeepLinkHandlerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-02-18T19:27:41" hostname="Mac.home" time="2.241">
+  <properties/>
+  <testcase name="handleDeepLink returns null when pathSegments is empty" classname="com.base.navigation.DeepLinkHandlerTest" time="2.23"/>
+  <testcase name="handleDeepLink returns Login for login path" classname="com.base.navigation.DeepLinkHandlerTest" time="0.006"/>
+  <testcase name="handleDeepLink returns null for unknown path" classname="com.base.navigation.DeepLinkHandlerTest" time="0.003"/>
+  <testcase name="handleDeepLink returns Register for register path" classname="com.base.navigation.DeepLinkHandlerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

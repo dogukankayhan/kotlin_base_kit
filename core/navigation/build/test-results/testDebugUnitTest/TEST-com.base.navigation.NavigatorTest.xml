@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.base.navigation.NavigatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-02-18T19:27:43" hostname="Mac.home" time="0.087">
+  <properties/>
+  <testcase name="navigateAndClear emits NavigateAndClear command" classname="com.base.navigation.NavigatorTest" time="0.083"/>
+  <testcase name="navigate emits Navigate command" classname="com.base.navigation.NavigatorTest" time="0.001"/>
+  <testcase name="popBackStack emits PopBackStack command" classname="com.base.navigation.NavigatorTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

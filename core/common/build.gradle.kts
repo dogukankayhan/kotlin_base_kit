@@ -1,0 +1,32 @@
+import org.gradle.api.JavaVersion
+
+plugins {
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+}
+
+android {
+    namespace = "com.base.common"
+    compileSdk = 36
+
+    defaultConfig {
+        minSdk = 24
+    }
+
+     compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    ksp(libs.hilt.compiler)
+}

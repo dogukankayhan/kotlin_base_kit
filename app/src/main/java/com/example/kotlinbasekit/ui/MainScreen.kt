@@ -100,9 +100,8 @@ fun MainScreen() {
                 SettingsScreen()
             }
             composable("${Route.MOVIE_DETAIL}/{${Arg.MOVIE_ID}}") { backStackEntry ->
-                val movieId = backStackEntry.arguments?.getString(Arg.MOVIE_ID)?.toIntOrNull()
                 MovieDetailScreen(
-                    onBackClick = { navController.popBackStack() }
+                    onNavigateBack = { navController.popBackStack() }
                 )
             }
         }

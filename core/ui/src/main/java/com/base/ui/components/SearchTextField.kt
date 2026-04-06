@@ -25,7 +25,7 @@ fun SearchTextField(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
-        label = { Text("Search Pokemon") },
+        label = { Text("Search Movies") },
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
         trailingIcon = {
             if (value.isNotEmpty()) {

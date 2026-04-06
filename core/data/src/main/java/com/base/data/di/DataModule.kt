@@ -5,10 +5,10 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.base.data.repository.FavoritesRepositoryImpl
-import com.base.data.repository.PokemonRepositoryImpl
+import com.base.data.repository.MovieRepositoryImpl
 import com.base.data.repository.TokenRepositoryImpl
 import com.base.domain.repository.FavoritesRepository
-import com.base.domain.repository.PokemonRepository
+import com.base.domain.repository.MovieRepository
 import com.base.domain.repository.TokenRepository
 import dagger.Binds
 import dagger.Module

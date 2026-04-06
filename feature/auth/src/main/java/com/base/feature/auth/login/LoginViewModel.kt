@@ -50,7 +50,7 @@ class LoginViewModel @Inject constructor(
             setState { copy(isLoading = false) }
 
             result.onSuccess {
-                coordinator.navigateToHome()
+                coordinator.navigateToDashboard()
             }.onFailure { exception ->
                 val errorMessage = when (exception) {
                     is com.base.network.model.ApiException.NetworkError -> 

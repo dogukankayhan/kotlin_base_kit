@@ -7,7 +7,7 @@ import javax.inject.Inject
 interface AuthCoordinator {
     suspend fun navigateToRegister()
     suspend fun navigateToLogin()
-    suspend fun navigateToHome()
+    suspend fun navigateToDashboard()
 }
 
 class DefaultAuthCoordinator @Inject constructor(
@@ -22,7 +22,7 @@ class DefaultAuthCoordinator @Inject constructor(
         navigator.navigate(NavigationRoute.Login)
     }
 
-    override suspend fun navigateToHome() {
-        navigator.navigateAndClear(NavigationRoute.Home, NavigationRoute.Login, true)
+    override suspend fun navigateToDashboard() {
+        navigator.navigateAndClear(NavigationRoute.Dashboard, NavigationRoute.Login, true)
     }
 }

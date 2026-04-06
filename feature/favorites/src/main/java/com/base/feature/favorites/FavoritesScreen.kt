@@ -20,13 +20,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.base.ui.components.PokemonCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritesScreen(
     viewModel: FavoritesViewModel = hiltViewModel(),
-    onNavigateToDetail: (String) -> Unit
+    onNavigateToDetail: (Int) -> Unit
 ) {
     val favorites by viewModel.favorites.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -51,12 +50,9 @@ fun FavoritesScreen(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(favorites) { pokemon ->
-                    PokemonCard(
-                        pokemon = pokemon,
-                        onPokemonClick = { onNavigateToDetail(pokemon.name) },
-                        onFavoriteClick = { viewModel.toggleFavorite(pokemon) }
-                    )
+                items(favorites) { movie ->
+                    // Make a simple placeholder for MovieCard later
+                    Text(text = movie.title)
                 }
             }
         }

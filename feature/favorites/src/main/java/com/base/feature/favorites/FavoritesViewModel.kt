@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.base.domain.usecase.AddFavoriteUseCase
 import com.base.domain.usecase.GetFavoritesUseCase
 import com.base.domain.usecase.RemoveFavoriteUseCase
-import com.base.model.Pokemon
+import com.base.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,8 +22,8 @@ class FavoritesViewModel @Inject constructor(
     private val removeFavoriteUseCase: RemoveFavoriteUseCase
 ) : ViewModel() {
 
-    private val _favorites = MutableStateFlow<List<Pokemon>>(emptyList())
-    val favorites: StateFlow<List<Pokemon>> = _favorites.asStateFlow()
+    private val _favorites = MutableStateFlow<List<Movie>>(emptyList())
+    val favorites: StateFlow<List<Movie>> = _favorites.asStateFlow()
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -34,21 +34,19 @@ class FavoritesViewModel @Inject constructor(
 
     private fun loadFavorites() {
         _isLoading.value = true
-        getFavoritesUseCase()
-            .onEach {
-                _favorites.value = it
+        getFavoritesUseCase(Unit)
+            .onEach { result ->
+                if (result is com.base.domain.result.Result.Success) {
+                    _favorites.value = result.data
+                }
                 _isLoading.value = false
             }
             .launchIn(viewModelScope)
     }
 
-    fun toggleFavorite(pokemon: Pokemon) {
+    fun removeFavorite(movieId: Int) {
         viewModelScope.launch {
-            if (pokemon.isFavorite) {
-                removeFavoriteUseCase(pokemon.id)
-            } else {
-                addFavoriteUseCase(pokemon)
-            }
+            removeFavoriteUseCase(movieId)
         }
     }
 }

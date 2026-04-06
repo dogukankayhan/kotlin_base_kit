@@ -1,70 +1,56 @@
-# Kotlin Base Project
+# Pokemon App
 
-A modern, modularized Android starter project built with Kotlin and Jetpack Compose, following Clean Architecture principles and best practices.
+This is a sample Android application that demonstrates modern Android development best practices.
 
-## 🚀 Tech Stack
+## Features
 
-- **UI**: [Jetpack Compose](https://developer.android.com/jetpack/compose) with Material 3.
-- **Dependency Injection**: [Hilt](https://dagger.dev/hilt/).
-- **Networking**: [Retrofit](https://square.github.io/retrofit/) & [OkHttp](https://square.github.io/okhttp/).
-- **Database**: [Room](https://developer.android.com/training/data-storage/room).
-- **Asynchronous Work**: [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) & [Flow](https://kotlinlang.org/docs/flow.html).
-- **Navigation**: [Hilt Navigation Compose](https://developer.android.com/jetpack/compose/navigation#hilt-navigation).
-- **Static Analysis**: [Detekt](https://detekt.dev/) & [Ktlint](https://pinterest.github.io/ktlint/).
-- **Local Storage**: [DataStore](https://developer.android.com/topic/libraries/architecture/datastore).
+*   View a list of Pokemons with pagination.
+*   Search for Pokemons by name.
+*   Filter Pokemons by type.
+*   View details of a specific Pokemon.
+*   Add and remove Pokemons from a list of favorites.
 
-## 🏗️ Architecture
+## Tech Stack
 
-The project follows a highly modular architecture based on **Clean Architecture** principles to ensure scalability, testability, and maintainability.
+*   [Kotlin](https://kotlinlang.org/) - First class and official programming language for Android development.
+*   [Jetpack Compose](https://developer.android.com/jetpack/compose) - Android’s modern toolkit for building native UI.
+*   [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - For asynchronous and non-blocking programming.
+*   [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html) - A cold asynchronous data stream that sequentially emits values and completes normally or with an exception.
+*   [Hilt](https://dagger.dev/hilt/) - For dependency injection.
+*   [Retrofit](https://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java.
+*   [Coil](https://coil-kt.github.io/coil/) - An image loading library for Android backed by Kotlin Coroutines.
+*   [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - A software design philosophy that separates the elements of a design into ring levels.
 
-### Module Structure
+## Setup
 
-- **`:app`**: The entry point of the application. Handles navigation initialization (`NavHost`) and dependency injection setup.
-- **`:feature:*`**: Business features of the app (e.g., `:feature:auth`, `:feature:favorites`). Each module is self-contained.
-- **`:core:*`**: Essential building blocks shared across the app:
-  - `:core:ui`: Common UI components, themes, and base classes.
-  - `:core:network`: Network infrastructure, interceptors, and API definitions.
-  - `:core:data`: Repositories and local data sources.
-  - `:core:domain`: Use cases and domain models.
-  - `:core:common`: Utilities, validators, and language management.
-  - `:core:navigation`: Centralized navigation and DeepLink handling.
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/pokemon-app.git
+    ```
+2.  Open the project in Android Studio.
+3.  Build and run the application.
 
-### Key Patterns
+## Architecture
 
-- **Coordinator Pattern**: Used for navigation logic decoupling within feature modules.
-- **MVI/MVVM (BaseViewModel)**: A structured approach to state management using `UiState`, `UiEvent`, and `UiEffect`.
-- **Validation System**: A rule-based validation framework located in `:core:common`.
+The application is structured based on Clean Architecture principles, with the following modules:
 
-## 🛠️ Getting Started
+*   `:app`: The main application module that integrates all other modules.
+*   `:core:common`: Contains common utilities and extensions.
+*   `:core:data`: Implements the data layer, including repositories and data sources.
+*   `:core:domain`: Contains the business logic of the application, including use cases and repository interfaces.
+*   `:core:model`: Contains the data models used throughout the application.
+*   `:core:navigation`: Defines the navigation routes and arguments.
+*   `:core:network`: Handles network requests using Retrofit.
+*   `:core:ui`: Contains common UI components.
+*   `:feature:pokemons`: Implements the Pokemon list and detail screens.
+*   `:feature:favorites`: Implements the favorites screen.
 
-### Prerequisites
+## SOLID Principles
 
-- Android Studio Iguana (2023.2.1) or newer.
-- JDK 17.
-- Kotlin 1.9.22.
+The project adheres to the SOLID principles of object-oriented design:
 
-### Setup
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/dogukankayhan/kotlin_base_kit.git
-   ```
-2. Open the project in Android Studio.
-3. Sync Gradle and build the project.
-
-## 🤝 Coding Standards
-
-To maintain code quality, the project uses `Ktlint` and `Detekt`.
-
-- **Format Code**:
-  ```bash
-  ./gradlew ktlintFormat
-  ```
-- **Run Linter**:
-  ```bash
-  ./gradlew ktlintCheck detekt
-  ```
-
-## 📬 Contact
-
-Project maintained by [Dogukan Kayhan](https://github.com/dogukankayhan).
+*   **Single Responsibility Principle:** Each class and function has a single, well-defined responsibility.
+*   **Open/Closed Principle:** Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.
+*   **Liskov Substitution Principle:** Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+*   **Interface Segregation Principle:** No client should be forced to depend on methods it does not use.
+*   **Dependency Inversion Principle:** High-level modules should not depend on low-level modules. Both should depend on abstractions.

@@ -1,7 +1,8 @@
 package com.base.feature.favorites;
 
-import com.base.domain.repository.FavoritesRepository;
-import com.base.feature.favorites.coordinator.FavoritesCoordinator;
+import com.base.domain.usecase.AddFavoriteUseCase;
+import com.base.domain.usecase.GetFavoritesUseCase;
+import com.base.domain.usecase.RemoveFavoriteUseCase;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -24,29 +25,34 @@ import javax.inject.Provider;
     "cast"
 })
 public final class FavoritesViewModel_Factory implements Factory<FavoritesViewModel> {
-  private final Provider<FavoritesRepository> favoritesRepositoryProvider;
+  private final Provider<GetFavoritesUseCase> getFavoritesUseCaseProvider;
 
-  private final Provider<FavoritesCoordinator> coordinatorProvider;
+  private final Provider<AddFavoriteUseCase> addFavoriteUseCaseProvider;
 
-  public FavoritesViewModel_Factory(Provider<FavoritesRepository> favoritesRepositoryProvider,
-      Provider<FavoritesCoordinator> coordinatorProvider) {
-    this.favoritesRepositoryProvider = favoritesRepositoryProvider;
-    this.coordinatorProvider = coordinatorProvider;
+  private final Provider<RemoveFavoriteUseCase> removeFavoriteUseCaseProvider;
+
+  public FavoritesViewModel_Factory(Provider<GetFavoritesUseCase> getFavoritesUseCaseProvider,
+      Provider<AddFavoriteUseCase> addFavoriteUseCaseProvider,
+      Provider<RemoveFavoriteUseCase> removeFavoriteUseCaseProvider) {
+    this.getFavoritesUseCaseProvider = getFavoritesUseCaseProvider;
+    this.addFavoriteUseCaseProvider = addFavoriteUseCaseProvider;
+    this.removeFavoriteUseCaseProvider = removeFavoriteUseCaseProvider;
   }
 
   @Override
   public FavoritesViewModel get() {
-    return newInstance(favoritesRepositoryProvider.get(), coordinatorProvider.get());
+    return newInstance(getFavoritesUseCaseProvider.get(), addFavoriteUseCaseProvider.get(), removeFavoriteUseCaseProvider.get());
   }
 
   public static FavoritesViewModel_Factory create(
-      Provider<FavoritesRepository> favoritesRepositoryProvider,
-      Provider<FavoritesCoordinator> coordinatorProvider) {
-    return new FavoritesViewModel_Factory(favoritesRepositoryProvider, coordinatorProvider);
+      Provider<GetFavoritesUseCase> getFavoritesUseCaseProvider,
+      Provider<AddFavoriteUseCase> addFavoriteUseCaseProvider,
+      Provider<RemoveFavoriteUseCase> removeFavoriteUseCaseProvider) {
+    return new FavoritesViewModel_Factory(getFavoritesUseCaseProvider, addFavoriteUseCaseProvider, removeFavoriteUseCaseProvider);
   }
 
-  public static FavoritesViewModel newInstance(FavoritesRepository favoritesRepository,
-      FavoritesCoordinator coordinator) {
-    return new FavoritesViewModel(favoritesRepository, coordinator);
+  public static FavoritesViewModel newInstance(GetFavoritesUseCase getFavoritesUseCase,
+      AddFavoriteUseCase addFavoriteUseCase, RemoveFavoriteUseCase removeFavoriteUseCase) {
+    return new FavoritesViewModel(getFavoritesUseCase, addFavoriteUseCase, removeFavoriteUseCase);
   }
 }

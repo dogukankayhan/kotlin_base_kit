@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    api(project(":core:model"))
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.kotlinx.coroutines.core)
@@ -36,4 +37,5 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
+    api(libs.coil.compose)
 }

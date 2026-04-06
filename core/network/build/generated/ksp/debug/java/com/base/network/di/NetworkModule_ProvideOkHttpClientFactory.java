@@ -47,6 +47,8 @@ public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<O
 
   private final Provider<TokenAuthenticator> tokenAuthenticatorProvider;
 
+  private final Provider<String> apiKeyProvider;
+
   private final Provider<Set<Interceptor>> extraInterceptorsProvider;
 
   public NetworkModule_ProvideOkHttpClientFactory(Provider<Cache> cacheProvider,
@@ -55,7 +57,7 @@ public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<O
       Provider<ConnectivityInterceptor> connectivityInterceptorProvider,
       Provider<CacheInterceptor> cacheInterceptorProvider,
       Provider<RetryInterceptor> retryInterceptorProvider,
-      Provider<TokenAuthenticator> tokenAuthenticatorProvider,
+      Provider<TokenAuthenticator> tokenAuthenticatorProvider, Provider<String> apiKeyProvider,
       Provider<Set<Interceptor>> extraInterceptorsProvider) {
     this.cacheProvider = cacheProvider;
     this.loggingInterceptorProvider = loggingInterceptorProvider;
@@ -64,12 +66,13 @@ public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<O
     this.cacheInterceptorProvider = cacheInterceptorProvider;
     this.retryInterceptorProvider = retryInterceptorProvider;
     this.tokenAuthenticatorProvider = tokenAuthenticatorProvider;
+    this.apiKeyProvider = apiKeyProvider;
     this.extraInterceptorsProvider = extraInterceptorsProvider;
   }
 
   @Override
   public OkHttpClient get() {
-    return provideOkHttpClient(cacheProvider.get(), loggingInterceptorProvider.get(), authInterceptorProvider.get(), connectivityInterceptorProvider.get(), cacheInterceptorProvider.get(), retryInterceptorProvider.get(), tokenAuthenticatorProvider.get(), extraInterceptorsProvider.get());
+    return provideOkHttpClient(cacheProvider.get(), loggingInterceptorProvider.get(), authInterceptorProvider.get(), connectivityInterceptorProvider.get(), cacheInterceptorProvider.get(), retryInterceptorProvider.get(), tokenAuthenticatorProvider.get(), apiKeyProvider.get(), extraInterceptorsProvider.get());
   }
 
   public static NetworkModule_ProvideOkHttpClientFactory create(Provider<Cache> cacheProvider,
@@ -78,16 +81,16 @@ public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<O
       Provider<ConnectivityInterceptor> connectivityInterceptorProvider,
       Provider<CacheInterceptor> cacheInterceptorProvider,
       Provider<RetryInterceptor> retryInterceptorProvider,
-      Provider<TokenAuthenticator> tokenAuthenticatorProvider,
+      Provider<TokenAuthenticator> tokenAuthenticatorProvider, Provider<String> apiKeyProvider,
       Provider<Set<Interceptor>> extraInterceptorsProvider) {
-    return new NetworkModule_ProvideOkHttpClientFactory(cacheProvider, loggingInterceptorProvider, authInterceptorProvider, connectivityInterceptorProvider, cacheInterceptorProvider, retryInterceptorProvider, tokenAuthenticatorProvider, extraInterceptorsProvider);
+    return new NetworkModule_ProvideOkHttpClientFactory(cacheProvider, loggingInterceptorProvider, authInterceptorProvider, connectivityInterceptorProvider, cacheInterceptorProvider, retryInterceptorProvider, tokenAuthenticatorProvider, apiKeyProvider, extraInterceptorsProvider);
   }
 
   public static OkHttpClient provideOkHttpClient(Cache cache,
       HttpLoggingInterceptor loggingInterceptor, AuthInterceptor authInterceptor,
       ConnectivityInterceptor connectivityInterceptor, CacheInterceptor cacheInterceptor,
-      RetryInterceptor retryInterceptor, TokenAuthenticator tokenAuthenticator,
+      RetryInterceptor retryInterceptor, TokenAuthenticator tokenAuthenticator, String apiKey,
       Set<Interceptor> extraInterceptors) {
-    return Preconditions.checkNotNullFromProvides(NetworkModule.INSTANCE.provideOkHttpClient(cache, loggingInterceptor, authInterceptor, connectivityInterceptor, cacheInterceptor, retryInterceptor, tokenAuthenticator, extraInterceptors));
+    return Preconditions.checkNotNullFromProvides(NetworkModule.INSTANCE.provideOkHttpClient(cache, loggingInterceptor, authInterceptor, connectivityInterceptor, cacheInterceptor, retryInterceptor, tokenAuthenticator, apiKey, extraInterceptors));
   }
 }

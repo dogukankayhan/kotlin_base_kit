@@ -4,7 +4,11 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.base.data.repository.FavoritesRepositoryImpl
+import com.base.data.repository.PokemonRepositoryImpl
 import com.base.data.repository.TokenRepositoryImpl
+import com.base.domain.repository.FavoritesRepository
+import com.base.domain.repository.PokemonRepository
 import com.base.domain.repository.TokenRepository
 import dagger.Binds
 import dagger.Module
@@ -26,9 +30,11 @@ abstract class DataModule {
 
     @Binds
     @Singleton
-    abstract fun bindFavoritesRepository(
-        favoritesRepository: com.base.data.repository.FavoritesRepositoryImpl
-    ): com.base.domain.repository.FavoritesRepository
+    abstract fun bindFavoritesRepository(favoritesRepository: FavoritesRepositoryImpl): FavoritesRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindMovieRepository(movieRepository: MovieRepositoryImpl): MovieRepository
 
     companion object {
         @Provides

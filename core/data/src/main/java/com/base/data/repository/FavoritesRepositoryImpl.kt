@@ -1,49 +1,38 @@
 package com.base.data.repository
 
 import com.base.domain.repository.FavoritesRepository
-import com.base.model.Product
+import com.base.model.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class FavoritesRepositoryImpl @Inject constructor() : FavoritesRepository {
 
-    private val _favorites = MutableStateFlow<List<Product>>(emptyList())
-    
-    companion object {
-        private const val PRODUCT_1_PRICE = 10.0
-        private const val PRODUCT_2_PRICE = 20.0
-    }
-    
-    // Initial dummy data
-    init {
-        _favorites.value = listOf(
-            Product("1", "Product 1", PRODUCT_1_PRICE, null, "Description 1"),
-            Product("2", "Product 2", PRODUCT_2_PRICE, null, "Description 2")
-        )
-    }
+    private val _favorites = MutableStateFlow<List<Movie>>(emptyList())
 
-    override fun getFavorites(): Flow<List<Product>> = _favorites.asStateFlow()
+    override fun getFavorites(): Flow<List<Movie>> = _favorites.asStateFlow()
 
-    override suspend fun addFavorite(product: Product) {
-        val current = _favorites.value.toMutableList()
-        if (current.none { it.id == product.id }) {
-            current.add(product)
-            _favorites.value = current
+    override suspend fun addFavorite(movie: Movie) {
+        _favorites.update { current ->
+            if (!current.any { it.id == movie.id }) {
+                current + movie
+            } else {
+                current
+            }
         }
     }
 
-    override suspend fun removeFavorite(productId: String) {
-        val current = _favorites.value.toMutableList()
-        current.removeAll { it.id == productId }
-        _favorites.value = current
+    override suspend fun removeFavorite(movieId: Int) {
+        _favorites.update { current ->
+            current.filterNot { it.id == movieId }
+        }
     }
 
-    override suspend fun isFavorite(productId: String): Boolean {
-        return _favorites.value.any { it.id == productId }
+    override suspend fun isFavorite(movieId: Int): Boolean {
+        return _favorites.value.any { it.id == movieId }
     }
 }

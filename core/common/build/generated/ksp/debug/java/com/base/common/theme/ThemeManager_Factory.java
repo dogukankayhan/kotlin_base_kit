@@ -1,6 +1,7 @@
 package com.base.common.theme;
 
-import android.content.Context;
+import androidx.datastore.core.DataStore;
+import androidx.datastore.preferences.core.Preferences;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -9,7 +10,7 @@ import javax.annotation.processing.Generated;
 import javax.inject.Provider;
 
 @ScopeMetadata("javax.inject.Singleton")
-@QualifierMetadata("dagger.hilt.android.qualifiers.ApplicationContext")
+@QualifierMetadata
 @DaggerGenerated
 @Generated(
     value = "dagger.internal.codegen.ComponentProcessor",
@@ -23,22 +24,22 @@ import javax.inject.Provider;
     "cast"
 })
 public final class ThemeManager_Factory implements Factory<ThemeManager> {
-  private final Provider<Context> contextProvider;
+  private final Provider<DataStore<Preferences>> dataStoreProvider;
 
-  public ThemeManager_Factory(Provider<Context> contextProvider) {
-    this.contextProvider = contextProvider;
+  public ThemeManager_Factory(Provider<DataStore<Preferences>> dataStoreProvider) {
+    this.dataStoreProvider = dataStoreProvider;
   }
 
   @Override
   public ThemeManager get() {
-    return newInstance(contextProvider.get());
+    return newInstance(dataStoreProvider.get());
   }
 
-  public static ThemeManager_Factory create(Provider<Context> contextProvider) {
-    return new ThemeManager_Factory(contextProvider);
+  public static ThemeManager_Factory create(Provider<DataStore<Preferences>> dataStoreProvider) {
+    return new ThemeManager_Factory(dataStoreProvider);
   }
 
-  public static ThemeManager newInstance(Context context) {
-    return new ThemeManager(context);
+  public static ThemeManager newInstance(DataStore<Preferences> dataStore) {
+    return new ThemeManager(dataStore);
   }
 }

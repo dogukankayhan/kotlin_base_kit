@@ -11,8 +11,12 @@ sealed interface NavigationRoute {
         override val route = "register"
     }
 
-    data object Home : NavigationRoute {
-        override val route = "home"
+    data object Dashboard : NavigationRoute {
+        override val route = "dashboard"
+    }
+
+    data object Search : NavigationRoute {
+        override val route = "search"
     }
 
     data object Settings : NavigationRoute {
@@ -23,13 +27,21 @@ sealed interface NavigationRoute {
         override val route = "favorites"
     }
     
+    data object MovieDetail : NavigationRoute {
+        override val route = "movie_detail/{movieId}"
+        fun createRoute(movieId: Int) = "movie_detail/$movieId"
+    }
+
     // Helper to match string routes
     companion object {
         fun fromRoute(route: String?): NavigationRoute? {
+            if (route == null) return null
+            if (route.startsWith("movie_detail/")) return MovieDetail
             return when (route) {
                 Login.route -> Login
                 Register.route -> Register
-                Home.route -> Home
+                Dashboard.route -> Dashboard
+                Search.route -> Search
                 Settings.route -> Settings
                 Favorites.route -> Favorites
                 else -> null

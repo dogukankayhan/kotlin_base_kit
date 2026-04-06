@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml:2:13-83
-INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml:2:13-83
+ADDED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml:2:13-83
+INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml:2:13-83
 	package
-		INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml
+		INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml
 	xmlns:android
-		ADDED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml:2:23-81
+		ADDED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml:2:23-81
 uses-sdk
-INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml reason: use-sdk injection requested
-INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml
-INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml
+INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml reason: use-sdk injection requested
+INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml
+INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml
 	android:targetSdkVersion
-		INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml
+		INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml
 	android:minSdkVersion
-		INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest8809077626653858347.xml
+		INJECTED from /Users/dogukankayhan/AndroidStudioProjects/KotlinBaseProject/core/auth/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest6450721295661456374.xml

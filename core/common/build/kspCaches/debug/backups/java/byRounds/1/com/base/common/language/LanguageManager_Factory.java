@@ -1,6 +1,7 @@
 package com.base.common.language;
 
-import android.content.Context;
+import androidx.datastore.core.DataStore;
+import androidx.datastore.preferences.core.Preferences;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
@@ -9,7 +10,7 @@ import javax.annotation.processing.Generated;
 import javax.inject.Provider;
 
 @ScopeMetadata("javax.inject.Singleton")
-@QualifierMetadata("dagger.hilt.android.qualifiers.ApplicationContext")
+@QualifierMetadata
 @DaggerGenerated
 @Generated(
     value = "dagger.internal.codegen.ComponentProcessor",
@@ -23,22 +24,22 @@ import javax.inject.Provider;
     "cast"
 })
 public final class LanguageManager_Factory implements Factory<LanguageManager> {
-  private final Provider<Context> contextProvider;
+  private final Provider<DataStore<Preferences>> dataStoreProvider;
 
-  public LanguageManager_Factory(Provider<Context> contextProvider) {
-    this.contextProvider = contextProvider;
+  public LanguageManager_Factory(Provider<DataStore<Preferences>> dataStoreProvider) {
+    this.dataStoreProvider = dataStoreProvider;
   }
 
   @Override
   public LanguageManager get() {
-    return newInstance(contextProvider.get());
+    return newInstance(dataStoreProvider.get());
   }
 
-  public static LanguageManager_Factory create(Provider<Context> contextProvider) {
-    return new LanguageManager_Factory(contextProvider);
+  public static LanguageManager_Factory create(Provider<DataStore<Preferences>> dataStoreProvider) {
+    return new LanguageManager_Factory(dataStoreProvider);
   }
 
-  public static LanguageManager newInstance(Context context) {
-    return new LanguageManager(context);
+  public static LanguageManager newInstance(DataStore<Preferences> dataStore) {
+    return new LanguageManager(dataStore);
   }
 }

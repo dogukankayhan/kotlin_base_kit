@@ -2,6 +2,8 @@ package com.base.network.di
 
 import android.content.Context
 import com.base.domain.repository.TokenRepository
+import com.base.network.api.AuthApi
+import com.base.network.api.MovieApi
 import com.base.network.authenticator.TokenAuthenticator
 import com.base.network.interceptor.AuthInterceptor
 import com.base.network.interceptor.CacheInterceptor
@@ -13,6 +15,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -67,6 +70,19 @@ object NetworkModule {
     fun provideTokenAuthenticator(tokenRepository: TokenRepository): TokenAuthenticator {
         return TokenAuthenticator(tokenRepository)
     }
+    
+    @Provides
+    @Singleton
+    @Named("TmdbAuthInterceptor")
+    fun provideTmdbAuthInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            val request = chain.request().newBuilder()
+                // Replace this line inside app/core implementation with proper buildconfig if needed. Assuming BuildConfig.API_KEY is available in app module
+                // We'll use the API_KEY provided by dagger instead to avoid cross-module BuildConfig dependencies.
+                .build()
+            chain.proceed(request)
+        }
+    }
 
     @Provides
     @Singleton
@@ -79,18 +95,28 @@ object NetworkModule {
         cacheInterceptor: CacheInterceptor,
         retryInterceptor: RetryInterceptor,
         tokenAuthenticator: TokenAuthenticator,
-        @Named("ExtraInterceptors") extraInterceptors: Set<@JvmSuppressWildcards okhttp3.Interceptor>
+        @Named("ApiKey") apiKey: String,
+        @Named("ExtraInterceptors") extraInterceptors: Set<@JvmSuppressWildcards Interceptor>
     ): OkHttpClient {
+        val tmdbInterceptor = Interceptor { chain ->
+            val request = chain.request().newBuilder()
+                .addHeader("Authorization", "Bearer $apiKey")
+                .addHeader("accept", "application/json")
+                .build()
+            chain.proceed(request)
+        }
+        
         val builder = OkHttpClient.Builder()
             .cache(cache)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .addInterceptor(tmdbInterceptor)
             .addInterceptor(connectivityInterceptor)
-            .addInterceptor(authInterceptor)
+            // .addInterceptor(authInterceptor) // Commented as we'll use TMDB Bearer
             .addInterceptor(retryInterceptor)
             .addNetworkInterceptor(cacheInterceptor)
-            .authenticator(tokenAuthenticator)
+            // .authenticator(tokenAuthenticator) 
             .addInterceptor(loggingInterceptor)
 
         extraInterceptors.forEach { builder.addInterceptor(it) }
@@ -113,14 +139,20 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthApi(retrofit: Retrofit): com.base.network.api.AuthApi {
-        return retrofit.create(com.base.network.api.AuthApi::class.java)
+    fun provideAuthApi(retrofit: Retrofit): AuthApi {
+        return retrofit.create(AuthApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieApi(retrofit: Retrofit): MovieApi {
+        return retrofit.create(MovieApi::class.java)
     }
 
     @Provides
     @Singleton
     @Named("ExtraInterceptors")
-    fun provideEmptyExtraInterceptors(): Set<@JvmSuppressWildcards okhttp3.Interceptor> {
+    fun provideEmptyExtraInterceptors(): Set<@JvmSuppressWildcards Interceptor> {
         return emptySet()
     }
 }

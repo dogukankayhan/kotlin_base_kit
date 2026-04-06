@@ -28,13 +28,19 @@ android {
     }
 
     buildTypes {
+        val tmdbApiKey = project.findProperty("TMDB_API_KEY") as? String ?: ""
+        
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            buildConfigField("String", "BASE_URL", "\"https://reqres.in/api/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+            buildConfigField("String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/w500/\"")
+            buildConfigField("String", "API_KEY", tmdbApiKey)
         }
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://reqres.in/api/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+            buildConfigField("String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/w500/\"")
+            buildConfigField("String", "API_KEY", tmdbApiKey)
         }
     }
 
@@ -69,7 +75,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.appcompat)
-    
+
     // Core Modules
     implementation(project(":core:navigation"))
     implementation(project(":core:network"))
@@ -82,6 +88,7 @@ dependencies {
     implementation(project(":core:deeplink"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:favorites"))
+    implementation(project(":feature:movies"))
     implementation(project(":core:config"))
 
     testImplementation(libs.junit)
@@ -91,8 +98,11 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    
+
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+    
+    // Lottie
+    implementation("com.airbnb.android:lottie-compose:6.4.0")
 }

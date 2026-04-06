@@ -5,16 +5,19 @@ import com.base.ui.base.UiEffect
 import com.base.ui.base.UiEvent
 import com.base.ui.base.UiState
 
+import com.base.ui.base.PaginatedUiState
+
 data class DashboardState(
-    val isLoading: Boolean = false,
-    val popularMovies: List<Movie> = emptyList(),
-    val trendingMovies: List<Movie> = emptyList(),
-    val topRatedMovies: List<Movie> = emptyList(),
-    val errorMessage: String? = null
-) : UiState
+    override val isLoading: Boolean = false,
+    override val items: List<Movie> = emptyList(),
+    override val error: String? = null,
+    override val page: Int = 1,
+    override val isLastPage: Boolean = false
+) : PaginatedUiState<Movie>
 
 sealed interface DashboardEvent : UiEvent {
     data object LoadData : DashboardEvent
+    data object LoadNextPage : DashboardEvent
     data class OnMovieClicked(val movieId: Int) : DashboardEvent
 }
 

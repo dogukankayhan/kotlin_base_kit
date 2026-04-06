@@ -99,11 +99,27 @@ object NetworkModule {
         @Named("ExtraInterceptors") extraInterceptors: Set<@JvmSuppressWildcards Interceptor>
     ): OkHttpClient {
         val tmdbInterceptor = Interceptor { chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer $apiKey")
+            val originalRequest = chain.request()
+            
+            val isV4Token = apiKey.length > 50
+            
+            val url = if (isV4Token) {
+                originalRequest.url
+            } else {
+                originalRequest.url.newBuilder()
+                    .addQueryParameter("api_key", apiKey)
+                    .build()
+            }
+
+            val requestBuilder = originalRequest.newBuilder()
+                .url(url)
                 .addHeader("accept", "application/json")
-                .build()
-            chain.proceed(request)
+                
+            if (isV4Token) {
+                requestBuilder.addHeader("Authorization", "Bearer $apiKey")
+            }
+
+            chain.proceed(requestBuilder.build())
         }
         
         val builder = OkHttpClient.Builder()

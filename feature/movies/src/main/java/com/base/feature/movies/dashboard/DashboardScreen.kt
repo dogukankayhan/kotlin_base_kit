@@ -50,11 +50,11 @@ fun DashboardScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            if (state.isLoading && state.popularMovies.isEmpty()) {
+            if (state.isLoading && state.items.isEmpty()) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            } else if (state.errorMessage != null && state.popularMovies.isEmpty()) {
+            } else if (state.error != null && state.items.isEmpty()) {
                 Text(
-                    text = state.errorMessage!!,
+                    text = state.error!!,
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.align(Alignment.Center)
                 )
@@ -66,11 +66,12 @@ fun DashboardScreen(
                 ) {
                     Spacer(modifier = Modifier.height(16.dp))
                     
-                    if (state.popularMovies.isNotEmpty()) {
+                    if (state.items.isNotEmpty()) {
                         MovieSection(
                             title = "Popular Movies",
-                            movies = state.popularMovies,
-                            onMovieClick = { viewModel.setEvent(DashboardEvent.OnMovieClicked(it)) }
+                            movies = state.items,
+                            onMovieClick = { viewModel.setEvent(DashboardEvent.OnMovieClicked(it)) },
+                            onLoadMore = { viewModel.setEvent(DashboardEvent.LoadNextPage) }
                         )
                     }
                     
@@ -85,7 +86,8 @@ fun DashboardScreen(
 fun MovieSection(
     title: String,
     movies: List<Movie>,
-    onMovieClick: (Int) -> Unit
+    onMovieClick: (Int) -> Unit,
+    onLoadMore: () -> Unit
 ) {
     Column {
         Text(
@@ -99,7 +101,11 @@ fun MovieSection(
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(movies) { movie ->
+            items(movies.size) { index ->
+                val movie = movies[index]
+                if (index >= movies.size - 3) { // Trigger load more when 3 items away
+                    onLoadMore()
+                }
                 MovieCard(
                     movie = movie,
                     onMovieClick = onMovieClick

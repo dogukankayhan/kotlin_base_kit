@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -28,8 +30,15 @@ android {
     }
 
     buildTypes {
-        val tmdbApiKey = project.findProperty("TMDB_API_KEY") as? String ?: ""
-        
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localProperties.load(localPropertiesFile.inputStream())
+        }
+        val tmdbApiKeyRaw = localProperties.getProperty("TMDB_API_KEY") ?: ""
+        val tmdbApiKey = tmdbApiKeyRaw.replace("\"", "")
+
+
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

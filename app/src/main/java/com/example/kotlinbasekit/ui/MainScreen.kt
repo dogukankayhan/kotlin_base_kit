@@ -84,17 +84,17 @@ fun MainScreen() {
                 )
             }
             composable(Route.DASHBOARD) {
-                DashboardScreen()
+                DashboardScreen(
+                    onNavigateToDetail = { movieId ->
+                        navController.navigate("${Route.MOVIE_DETAIL}/$movieId")
+                    }
+                )
             }
             composable(Route.SEARCH) {
                 SearchScreen()
             }
             composable(Route.FAVORITES) {
-                FavoritesScreen(
-                    onNavigateToDetail = { id ->
-                        navController.navigate("${Route.MOVIE_DETAIL}/$id")
-                    }
-                )
+                FavoritesScreen()
             }
             composable(Route.SETTINGS) {
                 SettingsScreen()

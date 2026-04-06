@@ -35,12 +35,12 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
             buildConfigField("String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/w500/\"")
-            buildConfigField("String", "API_KEY", tmdbApiKey)
+            buildConfigField("String", "API_KEY", "\"$tmdbApiKey\"")
         }
         debug {
             buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
             buildConfigField("String", "IMAGE_BASE_URL", "\"https://image.tmdb.org/t/p/w500/\"")
-            buildConfigField("String", "API_KEY", tmdbApiKey)
+            buildConfigField("String", "API_KEY", "\"$tmdbApiKey\"")
         }
     }
 

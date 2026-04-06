@@ -25,7 +25,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun FavoritesScreen(
     viewModel: FavoritesViewModel = hiltViewModel(),
-    onNavigateToDetail: (Int) -> Unit
 ) {
     val favorites by viewModel.favorites.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
